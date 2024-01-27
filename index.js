@@ -33,7 +33,11 @@ const URL = "https://www.imdb.com/title/tt17632862/?ref_=ttls_li_tt";
         let $ = cheerio.load(response);
         let title  = $('h1[data-testid="hero__pageTitle"] > span[class="hero__primary-text"]').text();
         let rating = $('div[data-testid="hero-rating-bar__aggregate-rating__score"] > span[class="sc-bde20123-1 cMEQkK"]').text();
-        console.log(title);
-        console.log(rating);
+        let poster =  $('div[class="ipc-media ipc-media--poster-27x40 ipc-image-media-ratio--poster-27x40 ipc-media--baseAlt ipc-media--poster-l ipc-poster__poster-image ipc-media__img"] > img').attr('src');
+        let releaseDate = $('ul[class="ipc-inline-list ipc-inline-list--show-dividers sc-d8941411-2 cdJsTz baseAlt"] > li > a[href="/title/tt17632862/releaseinfo?ref_=tt_ov_rdat"]').text();
+        console.log("Title: "+ title);
+        console.log("Rating: "+ rating);
+        console.log("Poster: "+ poster);
+        console.log("Release: "+ releaseDate);
 
 })()
