@@ -1,9 +1,8 @@
 const request = require('request-promise');
 const cheerio = require('cheerio');
 
-const URL = "https://www.imdb.com/title/tt17632862/?ref_=ttls_li_tt";
 
-const sec_URL="https://www.imdb.com/list/ls033398199/"
+const URL="https://www.imdb.com/list/ls033398199/";
 
 
 //nameless async function that runs normally
@@ -33,22 +32,12 @@ const sec_URL="https://www.imdb.com/list/ls033398199/"
 
         
         let $ = cheerio.load(response);
-        let title  = $('h1[data-testid="hero__pageTitle"] > span[class="hero__primary-text"]').text();
-        let rating = $('div[data-testid="hero-rating-bar__aggregate-rating__score"] > span[class="sc-bde20123-1 cMEQkK"]').text();
-        let poster =  $('div[class="ipc-media ipc-media--poster-27x40 ipc-image-media-ratio--poster-27x40 ipc-media--baseAlt ipc-media--poster-l ipc-poster__poster-image ipc-media__img"] > img').attr('src');
-        let releaseDate = $('ul[class="ipc-inline-list ipc-inline-list--show-dividers sc-d8941411-2 cdJsTz baseAlt"] > li > a[href="/title/tt17632862/releaseinfo?ref_=tt_ov_rdat"]').text();
-
         let creators = [];
-        $('div[class="ipc-metadata-list-item__content-container"] > ul[class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content baseAlt"] > li > a').each((i, elm) => {
+        $('div[class="lister-item-content"] > h3[class="lister-item-header"] a[href^="/title/"]').each((i, elm) => {
                 let creator = $(elm).text();
 
                 creators.push(creator);
         });
-
-        console.log("Title: "+ title);
-        console.log("Rating: "+ rating);
-        console.log("Poster: "+ poster);
-        console.log("Release: "+ releaseDate);
 
         console.log(creators);
 
